@@ -1,39 +1,35 @@
 var express = require('express');
 var router = express.Router();
-const cron = require('node-cron');
 
-let data = {
-  morning_number: undefined,
-  evening_number: undefined
-};
-
-/* GET home page. */
-router.get('/', function (req, res, next) {
-
-  function generateRandomNumbers() {
-    data.morning_number = Math.floor(Math.random() * 100) + 1;
-    data.evening_number = Math.floor(Math.random() * 100) + 1;
-
-    console.log(`Random Numbers at ${new Date().toLocaleTimeString()}: ${data.morning_number}, ${data.evening_number}`);
-  }
-
-  cron.schedule('0 7 * * *', () => {
-    generateRandomNumbers();
-  });
-
-  cron.schedule('1 12 * * *', () => {
-    generateRandomNumbers();
-  });
-
-  console.log('Cron jobs scheduled.');
-
-  res.render('index', {
-    title: '2D FOR MA HTET',
-    data: {
-      morning_number: data.morning_number,
-      evening_number: data.evening_number
+router.get('/', async function (req, res, next) {
+  try {
+    const today = new Date();
+    // const formattedDate = today.toISOString().split('T')[0];
+    var year = today.getFullYear();
+    var month = String(today.getMonth() + 1).padStart(2, '0');
+    var day = String(today.getDate()).padStart(2, '0');
+    var formattedDate = `${year}-${month}-${day}`;
+    const url = `https://api.thaistock2d.com/2d_result?date=${formattedDate}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);
     }
-  });
+
+    const data = await response.json();
+
+    res.render('index', {
+      title: 'MA HTET 2D',
+      data
+    });
+  } catch (error) {
+    console.error('Error:', error.message);
+
+    res.status(500).render('error', {
+      title: 'Error',
+      message: 'An unexpected error occurred.'
+    });
+  }
 });
+
 
 module.exports = router;

@@ -2,42 +2,81 @@
 <html>
 
 <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="shortcut icon" href="/images/twodlogo.jpg" type="image/x-icon">
+  <meta name="keywords" content="2D for Ma Htet" />
+  <meta name="description" content="Just Testing 2D" />
+  <meta name="author" content="OKS" />
   <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel="shortcut icon" href="/images/logojpg.jpg" type="image/x-icon">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <link href="assets/css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 
 <body>
-  <h3>မထက်အတွက် သူဌေးဖြစ်ဇီဖို့ 2D</h3>
-  <div class="container">
-    <span class="time"></span><br><br><br>
-    <span class='today'></span><br><br><br>
-    <span>နိအတွက် ကံကောင်းရေ ဂဏန်းတိကတောကေ</span><br><br><br>
-    <p class="morning-number"><%= data && data.morning_number !== undefined ? `မိုးထ ပေါက်ဖို့ ဂဏန်း - ${data.morning_number}` : 'မနက်ဂဏန်း မထွက်သေးပါ' %></p>
-    <p class="evening-number"><%= data && data.evening_number !== undefined ? `ညဖက် ပေါက်ဖို့ ဂဏန်း - ${data.evening_number}` : 'ညဖက်ဂဏန်း မထွက်သေးပါ' %></p>
-    <p>ကံကောင်းပါဇီ မထက်</p>
-  </div>
-  <script>
-    var today = new Date();
-    var options = {
-      day: '2-digit',
-      weekday: 'short',
-      month: 'long',
-      year: 'numeric'
-    };
+  <header class="header_section">
+    <div class="container-fluid ml-3">
+      <nav class="navbar navbar-expand-lg custom_nav-container justify-content-center ml-5">
+        <a class="navbar-brand" href="/">
+          <img src="/images/logo.png" width="200px" height="100px" alt="logo">
+        </a>
+      </nav>
+    </div>
+  </header>
 
-    document.querySelector('.today').innerText = today.toLocaleDateString('en-US', options);
+  <section class="slider_section position-relative">
+    <div class="slider_bg_box">
+      <img src="/images/mahtet.jpg" alt="">
+    </div>
+    <div class="slider_bg"></div>
+    <div class="container">
+      <div class="col-md-9 col-lg-8">
+        <div class="detail-box">
+          <div class="pt-5">
+            <% if (data.length > 0) { %>
+            <% for (let i = 0; i < data.length; i++) { %>
+            <h2><%= data[i].date %></h2>
+            <table>
+              <tr class="text-primary">
+                <th>အချိန်</th>
+                <th>ပေါက်ဂဏန်း</th>
+              </tr>
 
+              <% for (let j = 0; j < data[i].child.length; j++) { %>
+              <tr>
+                <td><%= data[i].child[j].time %></td>
+                <td><%= data[i].child[j].twod %></td>
+              </tr>
+              <% } %>
 
-    var time = new Date().getHours();
-    if (time < 12) {
-      document.querySelector('.time').innerText = 'သာလီစွ မိုးထဖက်ချေပါ မထက်';
-    } else if (time < 18) {
-      document.querySelector('.time').innerText = 'သာလီစွ နေ့လည်ဖက်ချေပါ မထက်';
-    } else {
-      document.querySelector('.time').innerText = 'သာလီစွ ညဇာသားချေပါ မထက်';
-    }
-  </script>
+            </table>
+            <br>
+            <h2>Good Luck Ma Htet &#128514;</h2>
+            <% } %>
+            <% } else { %>
+            <div>
+              <br><br><br><br>
+              <span class="text-white">2D ပေါက်ချိန် မရောက်သေးပါ</span>
+            </div>
+            <% } %>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer_section">
+    <div class="container">
+      <p class="text-secondary">
+        &copy; 2024 All Rights Reserved</a>
+      </p>
+    </div>
+  </footer>
 </body>
 
 </html>
