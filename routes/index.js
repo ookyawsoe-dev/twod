@@ -21,7 +21,7 @@ router.get('/', function (req, res, next) {
     generateRandomNumbers();
   });
 
-  cron.schedule('31 17 * * *', () => {
+  cron.schedule('33 17 * * *', () => {
     generateRandomNumbers();
   });
 
