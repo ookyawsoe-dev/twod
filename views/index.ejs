@@ -37,6 +37,12 @@
     <div class="container">
       <div class="col-md-9 col-lg-8">
         <div class="detail-box">
+          <br><br>
+          <form>
+            <input type="date" id="date" name="date" placeholder="<%= query.date || 'YYYY-MM-DD' %>" value="<%= query.date || '' %>">
+            <input type="submit" value="Search" value="<%= query.date || '' %>">
+            <a href="/">Refresh</a>
+          </form>
           <div class="pt-5">
             <% if (data.length > 0) { %>
             <% for (let i = 0; i < data.length; i++) { %>
