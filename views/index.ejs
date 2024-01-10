@@ -20,11 +20,14 @@
   <script>
     var today = new Date();
     var options = {
-      weekday: 'long',
+      day: '2-digit',
+      weekday: 'short',
       month: 'long',
       year: 'numeric'
     };
+
     document.querySelector('.today').innerText = today.toLocaleDateString('en-US', options);
+
 
     var time = new Date().getHours();
     if (time < 12) {
