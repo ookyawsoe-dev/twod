@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="shortcut icon" href="/images/logojpg.jpg" type="image/x-icon">
+</head>
+
+<body>
+  <h3>မထက်အတွက် သူဌေးဖြစ်ဇီဖို့ 2D</h3>
+  <div class="container">
+    <span class="time"></span><br><br><br>
+    <span class='today'></span><br><br><br>
+    <span>နိအတွက် ကံကောင်းရေ ဂဏန်းတိကတောကေ</span><br><br><br>
+    <p class="morning-number"><%= data && data.morning_number !== undefined ? `မိုးထ ပေါက်ဖို့ ဂဏန်း - ${data.morning_number}` : 'မနက်ဂဏန်း မထွက်သေးပါ' %></p>
+    <p class="evening-number"><%= data && data.evening_number !== undefined ? `ညဖက် ပေါက်ဖို့ ဂဏန်း - ${data.evening_number}` : 'ညဖက်ဂဏန်း မထွက်သေးပါ' %></p>
+    <p>ကံကောင်းပါဇီ မထက်</p>
+  </div>
+  <script>
+    var today = new Date();
+    var options = {
+      weekday: 'long',
+      month: 'long',
+      year: 'numeric'
+    };
+    document.querySelector('.today').innerText = today.toLocaleDateString('en-US', options);
+
+    var time = new Date().getHours();
+    if (time < 12) {
+      document.querySelector('.time').innerText = 'သာလီစွ မိုးထဖက်ချေပါ မထက်';
+    } else if (time < 18) {
+      document.querySelector('.time').innerText = 'သာလီစွ နေ့လည်ဖက်ချေပါ မထက်';
+    } else {
+      document.querySelector('.time').innerText = 'သာလီစွ ညဇာသားချေပါ မထက်';
+    }
+  </script>
+</body>
+
+</html>

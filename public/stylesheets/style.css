@@ -1,0 +1,50 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 80%;
+  width: 100%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+h3 {
+  font-size: 25px;
+  color: #db7134;
+  text-align: center;
+}
+span {
+  color: #3498db;
+  font-size: 20px;
+}
+p {
+  font-size: 20px;
+  color: red;
+}
+.today,
+.time {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.morning-number,
+.evening-number {
+  font-size: 20px;
+  color: #b51e1e;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+}
